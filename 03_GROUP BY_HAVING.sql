@@ -275,10 +275,85 @@ WHERE SALARY > 3000000;
 -- UNION ALL : 여러개의 쿼리 결과를 하나로 합치는 연산자
 -- UNION과의 차이점은 중복영역을 모두 포함시킨다. (합집합 +  교집합)
 
+-- 1) 부서코드가 'D5'
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D5'
+
+UNION ALL
+
+-- 2) 급여가 300만 초과
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE SALARY > 3000000;
 
 
 -- MINUS : 선행 SELECT 결과에서 다음 SELECT 결과와 겹치는 부분을 제외한 나머지 부분만 추출(차집합)
 -- 부서 코드 D5 중 급여가 300만 초과인 직원 제외
+
+-- 1) 부서코드가 'D5'
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D5'
+
+MINUS
+
+-- 2) 급여가 300만 초과
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE SALARY > 3000000;
+
+
+
+----------------------------------------------------------------------------
+
+
+-- 집합 연산자 실제 사용 예시
+
+-- * 집합 연산자 사용 시
+--   컬럼의 타입만 일치하면 연산 수행이 가능하다 *
+
+SELECT EMP_NAME, SALARY FROM EMPLOYEE
+WHERE EMP_ID = 200
+
+UNION 
+
+SELECT PHONE, 1000000 FROM EMPLOYEE
+WHERE EMP_ID = 201
+
+UNION 
+
+SELECT '홍길동', 4000000 FROM DUAL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
